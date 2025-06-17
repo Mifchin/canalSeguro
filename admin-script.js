@@ -13,7 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFilters();
     updateDashboard();
     initializeSettings();
+<<<<<<< HEAD
     setupAutoRefresh();
+=======
+<<<<<<< HEAD
+    setupAutoRefresh();
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 });
 
 // Check if user is authenticated and has admin role
@@ -21,6 +28,13 @@ function checkAuthentication() {
     const userData = sessionStorage.getItem('currentUser');
     
     if (!userData) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        // No user logged in, redirect to login
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         window.location.href = 'login.html';
         return;
     }
@@ -33,6 +47,13 @@ function checkAuthentication() {
     const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
     
     if (hoursDiff >= 8) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        // Session expired
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         sessionStorage.removeItem('currentUser');
         window.location.href = 'login.html';
         return;
@@ -40,6 +61,13 @@ function checkAuthentication() {
     
     // Check if user has admin role
     if (currentUser.role !== 'admin') {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        // Student trying to access admin page, redirect to student
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         window.location.href = 'index.html';
         return;
     }
@@ -83,8 +111,18 @@ function initializeTabs() {
             // Update content based on tab
             if (this.dataset.tab === 'reports') {
                 renderReportsTable();
+<<<<<<< HEAD
             } else if (this.dataset.tab === 'institutions') {
                 updateInstitutionsData();
+=======
+<<<<<<< HEAD
+            } else if (this.dataset.tab === 'institutions') {
+                updateInstitutionsData();
+=======
+            } else if (this.dataset.tab === 'statistics') {
+                updateStatistics();
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             }
         });
     });
@@ -92,12 +130,124 @@ function initializeTabs() {
 
 // Load reports from localStorage and memory
 function loadReports() {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     const storedReports = JSON.parse(localStorage.getItem('reports') || '{}');
     
     // Add comprehensive sample reports if none exist
     if (Object.keys(storedReports).length === 0) {
         const sampleReports = generateSampleReports();
         Object.assign(storedReports, sampleReports);
+<<<<<<< HEAD
+=======
+=======
+    // Load from localStorage
+    const storedReports = JSON.parse(localStorage.getItem('reports') || '{}');
+    
+    // Add sample reports if none exist
+    if (Object.keys(storedReports).length === 0) {
+        storedReports['CS-240610-DEMO'] = {
+            id: 'CS-240610-DEMO',
+            isAnonymous: true,
+            reporterUser: 'estudiante1',
+            institution: 'colegio-central',
+            incidentDate: '2025-06-08',
+            incidentTime: '10:30',
+            incidentLocation: 'Patio principal',
+            incidentType: 'verbal',
+            personsInvolved: 'Estudiante de grado 10°, víctima de grado 8°',
+            description: 'Situación de acoso verbal constante durante los recreos. El agresor utiliza insultos y amenazas hacia la víctima.',
+            urgency: 'media',
+            witnesses: 'Varios estudiantes presentes',
+            previousIncidents: 'frecuente',
+            additionalInfo: 'La víctima muestra signos de estrés y bajo rendimiento académico',
+            timestamp: '2025-06-08T10:30:00Z',
+            status: 'en-revision',
+            statusHistory: [
+                {
+                    status: 'recibida',
+                    date: '2025-06-08T10:30:00Z',
+                    note: 'Denuncia recibida correctamente'
+                },
+                {
+                    status: 'en-revision',
+                    date: '2025-06-09T08:00:00Z',
+                    note: 'Caso asignado al coordinador de convivencia para investigación'
+                }
+            ]
+        };
+
+        storedReports['CS-240609-TEST'] = {
+            id: 'CS-240609-TEST',
+            isAnonymous: false,
+            reporterName: 'María González',
+            reporterEmail: 'maria.gonzalez@email.com',
+            reporterPhone: '3001234567',
+            reporterGrade: '9° A',
+            reporterUser: 'estudiante2',
+            institution: 'escuela-norte',
+            incidentDate: '2025-06-07',
+            incidentTime: '14:15',
+            incidentLocation: 'Aula 205',
+            incidentType: 'fisico',
+            personsInvolved: 'Dos estudiantes de grado 10°',
+            description: 'Agresión física durante el cambio de clase. Uno de los estudiantes empujó y golpeó a otro.',
+            urgency: 'alta',
+            witnesses: 'Profesora de matemáticas y varios compañeros',
+            previousIncidents: 'pocas-veces',
+            additionalInfo: 'Se requiere intervención inmediata',
+            timestamp: '2025-06-07T14:15:00Z',
+            status: 'finalizada',
+            statusHistory: [
+                {
+                    status: 'recibida',
+                    date: '2025-06-07T14:15:00Z',
+                    note: 'Denuncia recibida correctamente'
+                },
+                {
+                    status: 'en-revision',
+                    date: '2025-06-07T15:00:00Z',
+                    note: 'Caso de alta prioridad asignado inmediatamente'
+                },
+                {
+                    status: 'finalizada',
+                    date: '2025-06-08T16:30:00Z',
+                    note: 'Medidas disciplinarias aplicadas. Seguimiento programado.'
+                }
+            ]
+        };
+
+        storedReports['CS-240605-CYBER'] = {
+            id: 'CS-240605-CYBER',
+            isAnonymous: true,
+            reporterUser: 'estudiante3',
+            institution: 'liceo-sur',
+            incidentDate: '2025-06-05',
+            incidentTime: '',
+            incidentLocation: 'Redes sociales',
+            incidentType: 'cyberbullying',
+            personsInvolved: 'Grupo de estudiantes de grado 11°',
+            description: 'Ciberacoso a través de redes sociales. Creación de grupos para burlarse y humillar a una compañera.',
+            urgency: 'alta',
+            witnesses: 'Capturas de pantalla disponibles',
+            previousIncidents: 'constante',
+            additionalInfo: 'La víctima ha considerado cambiar de institución',
+            timestamp: '2025-06-05T09:20:00Z',
+            status: 'recibida',
+            statusHistory: [
+                {
+                    status: 'recibida',
+                    date: '2025-06-05T09:20:00Z',
+                    note: 'Denuncia recibida correctamente'
+                }
+            ]
+        };
+
+        // Save sample reports
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         localStorage.setItem('reports', JSON.stringify(storedReports));
     }
     
@@ -105,6 +255,10 @@ function loadReports() {
     filteredReports = { ...allReports };
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 function generateSampleReports() {
     const institutions = [
         'colegio-central', 'escuela-norte', 'liceo-sur', 
@@ -259,21 +413,44 @@ function generateStatusHistory(finalStatus, baseDate) {
     return history;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 // Update dashboard statistics
 function updateDashboard() {
     const reports = Object.values(allReports);
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     // Update stat cards with animations
     animateCounter('totalReports', reports.length);
     animateCounter('pendingReports', reports.filter(r => r.status === 'recibida').length);
     animateCounter('reviewingReports', reports.filter(r => r.status === 'en-revision').length);
     animateCounter('completedReports', reports.filter(r => r.status === 'finalizada').length);
+<<<<<<< HEAD
+=======
+=======
+    // Update stat cards
+    document.getElementById('totalReports').textContent = reports.length;
+    document.getElementById('pendingReports').textContent = reports.filter(r => r.status === 'recibida').length;
+    document.getElementById('reviewingReports').textContent = reports.filter(r => r.status === 'en-revision').length;
+    document.getElementById('completedReports').textContent = reports.filter(r => r.status === 'finalizada').length;
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     
     // Update recent reports
     updateRecentReports();
     updateUrgentReports();
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 function animateCounter(elementId, targetValue) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -297,6 +474,11 @@ function animateCounter(elementId, targetValue) {
     requestAnimationFrame(updateCounter);
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 function updateRecentReports() {
     const recentReports = Object.values(allReports)
         .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -318,7 +500,15 @@ function updateRecentReports() {
             <div class="report-info">
                 <strong>${getInstitutionName(report.institution)}</strong><br>
                 ${getIncidentTypeName(report.incidentType)} - ${report.incidentLocation}
+<<<<<<< HEAD
                 <span class="urgency-badge urgency-${report.urgency}">${report.urgency.toUpperCase()}</span>
+=======
+<<<<<<< HEAD
+                <span class="urgency-badge urgency-${report.urgency}">${report.urgency.toUpperCase()}</span>
+=======
+                <span class="urgency-badge urgency-${report.urgency}">${report.urgency}</span>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             </div>
         </div>
     `).join('');
@@ -337,7 +527,15 @@ function updateUrgentReports() {
     }
     
     container.innerHTML = urgentReports.map(report => `
+<<<<<<< HEAD
         <div class="report-item urgent-item" onclick="openReportModal('${report.id}')">
+=======
+<<<<<<< HEAD
+        <div class="report-item urgent-item" onclick="openReportModal('${report.id}')">
+=======
+        <div class="report-item" onclick="openReportModal('${report.id}')">
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             <div class="report-header">
                 <span class="report-id">${report.id}</span>
                 <span class="report-date">${formatDate(report.timestamp)}</span>
@@ -345,7 +543,15 @@ function updateUrgentReports() {
             <div class="report-info">
                 <strong>${getInstitutionName(report.institution)}</strong><br>
                 ${getIncidentTypeName(report.incidentType)} - ${report.incidentLocation}
+<<<<<<< HEAD
                 <span class="urgency-badge urgency-${report.urgency}">${report.urgency.toUpperCase()}</span>
+=======
+<<<<<<< HEAD
+                <span class="urgency-badge urgency-${report.urgency}">${report.urgency.toUpperCase()}</span>
+=======
+                <span class="urgency-badge urgency-${report.urgency}">${report.urgency}</span>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             </div>
         </div>
     `).join('');
@@ -362,6 +568,10 @@ function initializeFilters() {
         filter.addEventListener('change', applyFilters);
     });
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     searchInput.addEventListener('input', debounce(applyFilters, 300));
 }
 
@@ -375,6 +585,12 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+<<<<<<< HEAD
+=======
+=======
+    searchInput.addEventListener('input', applyFilters);
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 }
 
 function applyFilters() {
@@ -417,6 +633,10 @@ function applyFilters() {
     });
     
     renderReportsTable();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     updateFilterStats();
 }
 
@@ -440,6 +660,11 @@ function createFilterIndicator() {
     tableContainer.parentNode.insertBefore(indicator, tableContainer);
     
     return indicator;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 }
 
 function renderReportsTable() {
@@ -459,14 +684,34 @@ function renderReportsTable() {
     }
     
     tbody.innerHTML = reports.map(report => `
+<<<<<<< HEAD
         <tr class="report-row" data-urgency="${report.urgency}">
             <td>
                 <span class="report-id-cell">
+=======
+<<<<<<< HEAD
+        <tr class="report-row" data-urgency="${report.urgency}">
+            <td>
+                <span class="report-id-cell">
+=======
+        <tr>
+            <td>
+                <span style="font-family: 'Courier New', monospace; font-weight: 600; color: var(--primary-color);">
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                     ${report.id}
                 </span>
             </td>
             <td>${formatDate(report.incidentDate)}</td>
+<<<<<<< HEAD
             <td class="institution-cell">${getInstitutionName(report.institution)}</td>
+=======
+<<<<<<< HEAD
+            <td class="institution-cell">${getInstitutionName(report.institution)}</td>
+=======
+            <td>${getInstitutionName(report.institution)}</td>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             <td>${getIncidentTypeName(report.incidentType)}</td>
             <td>
                 <span class="urgency-badge urgency-${report.urgency}">
@@ -480,6 +725,10 @@ function renderReportsTable() {
             </td>
             <td>
                 <div class="action-buttons">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                     <button class="btn-view" onclick="openReportModal('${report.id}')" title="Ver detalles">
                         <svg class="icon" viewBox="0 0 24 24">
                             <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
@@ -490,6 +739,13 @@ function renderReportsTable() {
                             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                         </svg>
                     </button>
+<<<<<<< HEAD
+=======
+=======
+                    <button class="btn-view" onclick="openReportModal('${report.id}')">Ver</button>
+                    <button class="btn-edit" onclick="editReport('${report.id}')">Editar</button>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                 </div>
             </td>
         </tr>
@@ -509,6 +765,10 @@ function openReportModal(reportId) {
     
     modalTitle.textContent = `Denuncia ${report.id}`;
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     modalBody.innerHTML = generateReportModalContent(report);
     
     modal.style.display = 'block';
@@ -517,6 +777,12 @@ function openReportModal(reportId) {
 
 function generateReportModalContent(report) {
     return `
+<<<<<<< HEAD
+=======
+=======
+    modalBody.innerHTML = `
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         <div class="report-details">
             <div class="detail-section">
                 <h4>Información General</h4>
@@ -571,12 +837,28 @@ function generateReportModalContent(report) {
             ` : `
                 <div class="detail-section">
                     <h4>Tipo de Denuncia</h4>
+<<<<<<< HEAD
                     <div class="anonymous-indicator">
+=======
+<<<<<<< HEAD
+                    <div class="anonymous-indicator">
+=======
+                    <p style="color: var(--warning-color); font-weight: 600;">
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                         <svg class="icon" style="width: 16px; height: 16px; margin-right: 4px;" viewBox="0 0 24 24">
                             <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
                         </svg>
                         Denuncia Anónima
+<<<<<<< HEAD
                     </div>
+=======
+<<<<<<< HEAD
+                    </div>
+=======
+                    </p>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                 </div>
             `}
             
@@ -635,11 +917,26 @@ function generateReportModalContent(report) {
             </div>
         </div>
     `;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    
+    modal.style.display = 'block';
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 }
 
 function closeModal() {
     document.getElementById('reportModal').style.display = 'none';
+<<<<<<< HEAD
     document.body.style.overflow = 'auto';
+=======
+<<<<<<< HEAD
+    document.body.style.overflow = 'auto';
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     currentReportId = null;
 }
 
@@ -650,7 +947,15 @@ function updateReportStatus() {
     const statusNote = document.getElementById('statusNote').value.trim();
     
     if (!statusNote) {
+<<<<<<< HEAD
         showNotification('Por favor proporciona una nota sobre el cambio de estado', 'warning');
+=======
+<<<<<<< HEAD
+        showNotification('Por favor proporciona una nota sobre el cambio de estado', 'warning');
+=======
+        alert('Por favor proporciona una nota sobre el cambio de estado');
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         return;
     }
     
@@ -658,7 +963,15 @@ function updateReportStatus() {
     const oldStatus = report.status;
     
     if (newStatus === oldStatus) {
+<<<<<<< HEAD
         showNotification('El estado seleccionado es el mismo que el actual', 'info');
+=======
+<<<<<<< HEAD
+        showNotification('El estado seleccionado es el mismo que el actual', 'info');
+=======
+        alert('El estado seleccionado es el mismo que el actual');
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         return;
     }
     
@@ -667,8 +980,17 @@ function updateReportStatus() {
     report.statusHistory.push({
         status: newStatus,
         date: new Date().toISOString(),
+<<<<<<< HEAD
         note: statusNote,
         updatedBy: currentUser.name
+=======
+<<<<<<< HEAD
+        note: statusNote,
+        updatedBy: currentUser.name
+=======
+        note: statusNote
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     });
     
     // Save to localStorage
@@ -679,6 +1001,10 @@ function updateReportStatus() {
     renderReportsTable();
     closeModal();
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     showNotification(`Estado actualizado de "${getStatusName(oldStatus)}" a "${getStatusName(newStatus)}"`, 'success');
 }
 
@@ -781,14 +1107,70 @@ function generateInstitutionReport(institutionId) {
     downloadFile(csvContent, `reporte_${institutionName}.csv`, 'text/csv');
     
     showNotification('Reporte generado y descargado exitosamente', 'success');
+<<<<<<< HEAD
+=======
+=======
+    alert(`Estado actualizado de "${getStatusName(oldStatus)}" a "${getStatusName(newStatus)}"`);
+}
+
+function editReport(reportId) {
+    // For now, just open the modal - in a full implementation, this would open an edit form
+    openReportModal(reportId);
+}
+
+// Statistics functions
+function updateStatistics() {
+    // This would integrate with a charting library like Chart.js
+    // For now, we'll just update the summary statistics
+    const reports = Object.values(allReports);
+    
+    // Calculate average resolution time
+    const completedReports = reports.filter(r => r.status === 'finalizada');
+    let totalDays = 0;
+    
+    completedReports.forEach(report => {
+        const startDate = new Date(report.timestamp);
+        const endDate = new Date(report.statusHistory[report.statusHistory.length - 1].date);
+        const diffTime = Math.abs(endDate - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        totalDays += diffDays;
+    });
+    
+    const avgResolutionTime = completedReports.length > 0 ? (totalDays / completedReports.length).toFixed(1) : 0;
+    const resolutionRate = reports.length > 0 ? Math.round((completedReports.length / reports.length) * 100) : 0;
+    const criticalCases = reports.filter(r => r.urgency === 'alta').length;
+    const criticalResolved = reports.filter(r => r.urgency === 'alta' && r.status === 'finalizada').length;
+    const criticalRate = criticalCases > 0 ? Math.round((criticalResolved / criticalCases) * 100) : 100;
+    
+    // Update summary statistics
+    const avgTimeElement = document.getElementById('avgResolutionTime');
+    const resolutionRateElement = document.getElementById('resolutionRate');
+    const criticalCasesElement = document.getElementById('criticalCases');
+    
+    if (avgTimeElement) avgTimeElement.textContent = `${avgResolutionTime} días`;
+    if (resolutionRateElement) resolutionRateElement.textContent = `${resolutionRate}%`;
+    if (criticalCasesElement) criticalCasesElement.textContent = `${criticalRate}%`;
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 }
 
 // Settings functions
 function initializeSettings() {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    // Initialize toggle switches
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     const toggles = document.querySelectorAll('.toggle-switch');
     toggles.forEach(toggle => {
         toggle.addEventListener('click', function() {
             this.classList.toggle('active');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             handleSettingChange(this);
         });
     });
@@ -914,6 +1296,13 @@ function downloadFile(content, filename, contentType) {
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
+<<<<<<< HEAD
+=======
+=======
+        });
+    });
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 }
 
 // Utility functions
@@ -982,7 +1371,15 @@ function formatDateTime(dateString) {
     });
 }
 
+<<<<<<< HEAD
 // Event listeners
+=======
+<<<<<<< HEAD
+// Event listeners
+=======
+// Close modal when clicking outside
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 window.onclick = function(event) {
     const modal = document.getElementById('reportModal');
     if (event.target === modal) {
@@ -990,11 +1387,28 @@ window.onclick = function(event) {
     }
 }
 
+<<<<<<< HEAD
 document.addEventListener('keydown', function(e) {
+=======
+<<<<<<< HEAD
+document.addEventListener('keydown', function(e) {
+=======
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Close modal with Escape key
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     if (e.key === 'Escape') {
         closeModal();
     }
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    // Quick search with Ctrl+F
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
     if (e.ctrlKey && e.key === 'f') {
         e.preventDefault();
         const searchInput = document.getElementById('searchInput');
@@ -1004,6 +1418,10 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Add loading indicator
@@ -1023,4 +1441,149 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingIndicator.remove();
         }
     }, 1000);
+<<<<<<< HEAD
 });
+=======
+});
+=======
+// Auto-refresh dashboard every 30 seconds
+setInterval(() => {
+    if (document.querySelector('.nav-tab[data-tab="dashboard"]').classList.contains('active')) {
+        loadReports();
+        updateDashboard();
+    }
+}, 30000);
+
+// Export functions (placeholder implementations)
+function exportReports() {
+    const reports = Object.values(allReports);
+    const csvContent = generateCSV(reports);
+    downloadFile(csvContent, 'denuncias.csv', 'text/csv');
+}
+
+function generateCSV(reports) {
+    const headers = ['ID', 'Fecha', 'Institución', 'Tipo', 'Urgencia', 'Estado', 'Descripción'];
+    const rows = reports.map(report => [
+        report.id,
+        formatDate(report.incidentDate),
+        getInstitutionName(report.institution),
+        getIncidentTypeName(report.incidentType),
+        report.urgency,
+        getStatusName(report.status),
+        report.description.replace(/,/g, ';') // Replace commas to avoid CSV issues
+    ]);
+    
+    return [headers, ...rows].map(row => row.join(',')).join('\n');
+}
+
+function downloadFile(content, filename, contentType) {
+    const blob = new Blob([content], { type: contentType });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
+// Add CSS for modal detail styles
+const additionalStyles = `
+    .detail-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .detail-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+    
+    .detail-section h4 {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .detail-item {
+        padding: 0.75rem;
+        background: var(--light-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+    
+    .detail-item strong {
+        color: var(--text-primary);
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .detail-text {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: var(--light-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        line-height: 1.6;
+    }
+    
+    .detail-text strong {
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    .status-history {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .history-item {
+        padding: 1rem;
+        background: var(--light-bg);
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .history-date {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .history-note {
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+    
+    .status-update {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    @media (max-width: 768px) {
+        .detail-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+`;
+
+// Inject additional styles
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107

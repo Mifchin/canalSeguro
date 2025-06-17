@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canal Seguro - Panel Administrativo</title>
     <link rel="stylesheet" href="admin-style.css">
+<<<<<<< HEAD
     <link rel="icon" href="img/favicon2.png" type="image/x-icon">
+=======
+<<<<<<< HEAD
+    <link rel="icon" href="img/favicon2.png" type="image/x-icon">
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
 </head>
 <body>
     <header class="header">
@@ -23,13 +30,37 @@
                         <span class="user-name" id="userName">Administrador</span>
                         <span class="user-role">Coordinador</span>
                     </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                    <button class="logout-btn" onclick="logout()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.59L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                        </svg>
+                        Cerrar Sesión
+                    </button>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                 </div>
                 <nav class="nav-tabs">
                     <a href="#" class="nav-tab active" data-tab="dashboard">Dashboard</a>
                     <a href="#" class="nav-tab" data-tab="reports">Denuncias</a>
+<<<<<<< HEAD
                     <a href="#" class="nav-tab" data-tab="institutions">Instituciones</a>
                     <a href="#" class="nav-tab" data-tab="settings">Configuración</a>
                     <a href="#" class="nav-tab" onclick="logout()">Salir</a>
+=======
+<<<<<<< HEAD
+                    <a href="#" class="nav-tab" data-tab="institutions">Instituciones</a>
+                    <a href="#" class="nav-tab" data-tab="settings">Configuración</a>
+                    <a href="#" class="nav-tab" onclick="logout()">Salir</a>
+=======
+                    <a href="#" class="nav-tab" data-tab="statistics">Estadísticas</a>
+                    <a href="#" class="nav-tab" data-tab="institutions">Instituciones</a>
+                    <a href="#" class="nav-tab" data-tab="settings">Configuración</a>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                 </nav>
             </div>
         </div>
@@ -133,12 +164,21 @@
                             <option value="escuela-rural">I.E CACIQUE NOANAMÁ</option>
                         </select>
                         <input type="text" class="search-input" id="searchInput" placeholder="Buscar por ID o descripción...">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                         <button class="export-btn" onclick="exportReports()">
                             <svg class="icon" viewBox="0 0 24 24">
                                 <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                             </svg>
                             Exportar
                         </button>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                     </div>
                 </div>
 
@@ -162,12 +202,143 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+            <!-- TAB: STATISTICS -->
+            <div id="statistics-tab" class="tab-content">
+                <div class="statistics-grid">
+                    <div class="chart-card">
+                        <h3 class="chart-title">Denuncias por Estado</h3>
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Tipos de Incidentes</h3>
+                        <div class="chart-container">
+                            <canvas id="incidentChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Denuncias por Institución</h3>
+                        <div class="chart-container">
+                            <canvas id="institutionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Tendencia Mensual</h3>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statistics-summary">
+                    <div class="summary-card">
+                        <h4>Resumen del Período</h4>
+                        <div class="summary-stats">
+                            <div class="summary-item">
+                                <span class="summary-label">Tiempo promedio de resolución:</span>
+                                <span class="summary-value" id="avgResolutionTime">3.2 días</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Tasa de resolución:</span>
+                                <span class="summary-value" id="resolutionRate">87%</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Casos críticos atendidos:</span>
+                                <span class="summary-value" id="criticalCases">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             <!-- TAB: INSTITUTIONS -->
             <div id="institutions-tab" class="tab-content">
                 <h2 class="section-title">Gestión de Instituciones</h2>
                 
                 <div class="institutions-grid">
+<<<<<<< HEAD
                     <!-- Institution cards will be populated here -->
+=======
+<<<<<<< HEAD
+                    <!-- Institution cards will be populated here -->
+=======
+                    <div class="institution-card">
+                        <h4>CENTRO EDUCATIVO PACIFICO</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">3</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">12</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">2.8 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+
+                    <div class="institution-card">
+                        <h4>I.E AGROPECUARIA TAGACHI</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">1</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">8</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">3.1 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+
+                    <div class="institution-card">
+                        <h4>I.E ANTONIO MARIA CLARET</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">5</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">15</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">4.2 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                 </div>
             </div>
 
@@ -222,9 +393,21 @@
                     <div class="settings-section">
                         <h3 class="settings-title">Exportar Datos</h3>
                         <div class="export-options">
+<<<<<<< HEAD
                             <button class="btn-secondary" onclick="exportReports()">Exportar Denuncias (CSV)</button>
                             <button class="btn-secondary">Exportar Reporte Mensual (PDF)</button>
                             <button class="btn-secondary">Backup de Datos</button>
+=======
+<<<<<<< HEAD
+                            <button class="btn-secondary" onclick="exportReports()">Exportar Denuncias (CSV)</button>
+                            <button class="btn-secondary">Exportar Reporte Mensual (PDF)</button>
+                            <button class="btn-secondary">Backup de Datos</button>
+=======
+                            <button class="btn-secondary">Exportar Denuncias (CSV)</button>
+                            <button class="btn-secondary">Exportar Estadísticas (PDF)</button>
+                            <button class="btn-secondary">Reporte Mensual (PDF)</button>
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
+>>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
                         </div>
                     </div>
                 </div>
