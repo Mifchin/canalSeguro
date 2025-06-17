@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal Seguro - Panel Administrativo</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">CS</div>
+                    <div>
+                        <h1 class="header-title">Canal Seguro</h1>
+                        <p class="header-subtitle">Panel Administrativo</p>
+                    </div>
+                </div>
+                <div class="user-section">
+                    <div class="user-info">
+                        <span class="user-name" id="userName">Administrador</span>
+                        <span class="user-role">Coordinador</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.59L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                        </svg>
+                        Cerrar Sesión
+                    </button>
+                </div>
+                <nav class="nav-tabs">
+                    <a href="#" class="nav-tab active" data-tab="dashboard">Dashboard</a>
+                    <a href="#" class="nav-tab" data-tab="reports">Denuncias</a>
+                    <a href="#" class="nav-tab" data-tab="statistics">Estadísticas</a>
+                    <a href="#" class="nav-tab" data-tab="institutions">Instituciones</a>
+                    <a href="#" class="nav-tab" data-tab="settings">Configuración</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- TAB: DASHBOARD -->
+            <div id="dashboard-tab" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="stats-cards">
+                        <div class="stat-card stat-total">
+                            <div class="stat-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="totalReports">0</div>
+                                <div class="stat-label">Total Denuncias</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card stat-pending">
+                            <div class="stat-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="pendingReports">0</div>
+                                <div class="stat-label">Pendientes</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card stat-reviewing">
+                            <div class="stat-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="reviewingReports">0</div>
+                                <div class="stat-label">En Revisión</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card stat-completed">
+                            <div class="stat-icon">
+                                <svg class="icon" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="completedReports">0</div>
+                                <div class="stat-label">Finalizadas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-reports">
+                        <h3 class="section-title">Denuncias Recientes</h3>
+                        <div class="reports-list" id="recentReportsList">
+                            <!-- Reports will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="urgent-reports">
+                        <h3 class="section-title">Casos Urgentes</h3>
+                        <div class="urgent-list" id="urgentReportsList">
+                            <!-- Urgent reports will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: REPORTS -->
+            <div id="reports-tab" class="tab-content">
+                <div class="reports-header">
+                    <h2 class="section-title">Gestión de Denuncias</h2>
+                    <div class="reports-filters">
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">Todos los estados</option>
+                            <option value="recibida">Recibidas</option>
+                            <option value="en-revision">En Revisión</option>
+                            <option value="finalizada">Finalizadas</option>
+                        </select>
+                        <select class="filter-select" id="urgencyFilter">
+                            <option value="">Todas las urgencias</option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="baja">Baja</option>
+                        </select>
+                        <select class="filter-select" id="institutionFilter">
+                            <option value="">Todas las instituciones</option>
+                            <option value="colegio-central">CENTRO EDUCATIVO PACIFICO</option>
+                            <option value="escuela-norte">I.E AGROPECUARIA TAGACHI</option>
+                            <option value="liceo-sur">I.E ANTONIO MARIA CLARET</option>
+                            <option value="instituto-tecnico">I.E ANTONIO RICAURTE</option>
+                            <option value="colegio-santa-maria">I.E ANTONIO ROLDAN BETANCUR</option>
+                            <option value="escuela-rural">I.E CACIQUE NOANAMÁ</option>
+                        </select>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Buscar por ID o descripción...">
+                    </div>
+                </div>
+
+                <div class="reports-table-container">
+                    <table class="reports-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Institución</th>
+                                <th>Tipo</th>
+                                <th>Urgencia</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsTableBody">
+                            <!-- Reports will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB: STATISTICS -->
+            <div id="statistics-tab" class="tab-content">
+                <div class="statistics-grid">
+                    <div class="chart-card">
+                        <h3 class="chart-title">Denuncias por Estado</h3>
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Tipos de Incidentes</h3>
+                        <div class="chart-container">
+                            <canvas id="incidentChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Denuncias por Institución</h3>
+                        <div class="chart-container">
+                            <canvas id="institutionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3 class="chart-title">Tendencia Mensual</h3>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statistics-summary">
+                    <div class="summary-card">
+                        <h4>Resumen del Período</h4>
+                        <div class="summary-stats">
+                            <div class="summary-item">
+                                <span class="summary-label">Tiempo promedio de resolución:</span>
+                                <span class="summary-value" id="avgResolutionTime">3.2 días</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Tasa de resolución:</span>
+                                <span class="summary-value" id="resolutionRate">87%</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Casos críticos atendidos:</span>
+                                <span class="summary-value" id="criticalCases">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: INSTITUTIONS -->
+            <div id="institutions-tab" class="tab-content">
+                <h2 class="section-title">Gestión de Instituciones</h2>
+                
+                <div class="institutions-grid">
+                    <div class="institution-card">
+                        <h4>CENTRO EDUCATIVO PACIFICO</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">3</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">12</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">2.8 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+
+                    <div class="institution-card">
+                        <h4>I.E AGROPECUARIA TAGACHI</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">1</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">8</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">3.1 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+
+                    <div class="institution-card">
+                        <h4>I.E ANTONIO MARIA CLARET</h4>
+                        <div class="institution-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Denuncias activas:</span>
+                                <span class="stat-value">5</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Resueltas este mes:</span>
+                                <span class="stat-value">15</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tiempo promedio:</span>
+                                <span class="stat-value">4.2 días</span>
+                            </div>
+                        </div>
+                        <div class="institution-actions">
+                            <button class="btn-secondary">Ver Detalles</button>
+                            <button class="btn-primary">Generar Reporte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: SETTINGS -->
+            <div id="settings-tab" class="tab-content">
+                <div class="settings-grid">
+                    <div class="settings-section">
+                        <h3 class="settings-title">Configuración General</h3>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label class="form-label">Tiempo máximo de respuesta (días)</label>
+                                <input type="number" class="form-control" value="7" min="1" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Notificaciones automáticas</label>
+                                <div class="toggle-switch active">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Correo de notificaciones</label>
+                                <input type="email" class="form-control" value="admin@canalseguro.edu.co">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-title">Usuarios y Permisos</h3>
+                        <div class="users-list">
+                            <div class="user-item">
+                                <div class="user-info">
+                                    <strong>Ana Rodríguez</strong>
+                                    <span>Coordinadora Principal</span>
+                                </div>
+                                <div class="user-actions">
+                                    <button class="btn-secondary">Editar</button>
+                                </div>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-info">
+                                    <strong>Luis Martínez</strong>
+                                    <span>Coordinador Adjunto</span>
+                                </div>
+                                <div class="user-actions">
+                                    <button class="btn-secondary">Editar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-primary">Agregar Usuario</button>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3 class="settings-title">Exportar Datos</h3>
+                        <div class="export-options">
+                            <button class="btn-secondary">Exportar Denuncias (CSV)</button>
+                            <button class="btn-secondary">Exportar Estadísticas (PDF)</button>
+                            <button class="btn-secondary">Reporte Mensual (PDF)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Report Detail Modal -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Detalle de Denuncia</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Report details will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cerrar</button>
+                <button class="btn-primary" onclick="updateReportStatus()">Actualizar Estado</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
