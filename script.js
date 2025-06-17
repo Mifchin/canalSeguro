@@ -61,10 +61,6 @@
             }
         }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         // Logout function - Enhanced with better UX
         function logout() {
             // Show confirmation dialog
@@ -100,16 +96,6 @@
             } catch (error) {
                 console.error('Error al cerrar sesión:', error);
                 window.location.href = 'login.html';
-<<<<<<< HEAD
-=======
-=======
-        // Logout function
-        function logout() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-                sessionStorage.removeItem('currentUser');
-                window.location.href = 'login.html';
->>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
->>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
             }
         }
 
@@ -493,10 +479,6 @@
                     }
                 });
             }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         });
 
         // Additional security: Prevent back button after logout
@@ -510,9 +492,4 @@
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function(event) {
             checkAuthentication();
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
->>>>>>> 55bc23c543f5373f65bbf2ce7196a9f245d2b107
         });
