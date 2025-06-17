@@ -79,6 +79,61 @@
             margin-top: 0.25rem;
         }
 
+        /* User Section Styles */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: var(--light-bg);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .logout-btn .icon {
+            width: 16px;
+            height: 16px;
+        }
+
         .nav-tabs {
             display: flex;
             gap: 1rem;
@@ -486,6 +541,33 @@
             color: var(--primary-color);
         }
 
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .user-section {
+                order: -1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-tabs {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
         @media (max-width: 768px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -515,10 +597,125 @@
             .tracking-form {
                 flex-direction: column;
             }
+
+            .user-section {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .user-info {
+                align-items: center;
+            }
+
+            .logout-btn {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.75rem;
+            }
         }
 
-        .icon {
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+
+            .header {
+                padding: 1rem 0;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .form-section, .info-card, .tracking-section, .news-section {
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .urgency-selector {
+                gap: 0.5rem;
+            }
+
+            .urgency-option {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animation for smooth transitions */
+        .tab-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 20px;
             height: 20px;
-            fill: currentColor;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .nav-tab:focus,
+        .form-control:focus,
+        .submit-btn:focus,
+        .tracking-btn:focus,
+        .logout-btn:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-color: #000000;
+                --text-secondary: #000000;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }

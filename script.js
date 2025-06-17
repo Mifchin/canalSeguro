@@ -5,13 +5,69 @@
         
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
             initializeTabs();
             initializeUrgencySelector();
             initializeForm();
             initializeAnonymousToggle();
             setDefaultDate();
             initializeSampleReports();
+            loadUserInfo();
         });
+
+        // Check if user is authenticated
+        function checkAuthentication() {
+            const currentUser = sessionStorage.getItem('currentUser');
+            
+            if (!currentUser) {
+                // No user logged in, redirect to login
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const userData = JSON.parse(currentUser);
+            
+            // Check if session is still valid (less than 8 hours old)
+            const loginTime = new Date(userData.loginTime);
+            const now = new Date();
+            const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+            
+            if (hoursDiff >= 8) {
+                // Session expired
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Check if user has correct role for this page
+            if (userData.role !== 'student') {
+                // Admin trying to access student page, redirect to admin
+                window.location.href = 'admin.html';
+                return;
+            }
+        }
+
+        // Load user information into header
+        function loadUserInfo() {
+            const currentUser = sessionStorage.getItem('currentUser');
+            
+            if (currentUser) {
+                const userData = JSON.parse(currentUser);
+                const userNameElement = document.getElementById('userName');
+                
+                if (userNameElement) {
+                    userNameElement.textContent = userData.name;
+                }
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
 
         // Sistema de pestañas
         function initializeTabs() {
@@ -128,6 +184,7 @@
 
         function submitReport() {
             const trackingId = generateTrackingId();
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
             
             const reportData = {
                 id: trackingId,
@@ -136,6 +193,7 @@
                 reporterEmail: isAnonymous ? null : document.getElementById('reporterEmail').value,
                 reporterPhone: isAnonymous ? null : document.getElementById('reporterPhone').value,
                 reporterGrade: isAnonymous ? null : document.getElementById('reporterGrade').value,
+                reporterUser: currentUser.username, // Track which user submitted (for admin purposes)
                 institution: document.getElementById('institution').value,
                 incidentDate: document.getElementById('incidentDate').value,
                 incidentTime: document.getElementById('incidentTime').value,
@@ -160,6 +218,11 @@
             
             // Guardar en "base de datos" simulada
             reports[trackingId] = reportData;
+            
+            // Also save to localStorage for persistence
+            const existingReports = JSON.parse(localStorage.getItem('reports') || '{}');
+            existingReports[trackingId] = reportData;
+            localStorage.setItem('reports', JSON.stringify(existingReports));
             
             console.log('Reporte enviado:', reportData);
             
@@ -213,7 +276,12 @@
                 return;
             }
             
-            const report = reports[trackingId];
+            // Check both memory and localStorage
+            let report = reports[trackingId];
+            if (!report) {
+                const existingReports = JSON.parse(localStorage.getItem('reports') || '{}');
+                report = existingReports[trackingId];
+            }
             
             if (!report) {
                 resultsContainer.innerHTML = `
@@ -276,12 +344,12 @@
         // Funciones auxiliares
         function getInstitutionName(value) {
             const institutions = {
-                'colegio-central': 'Colegio Central Departamental',
-                'escuela-norte': 'Escuela Norte',
-                'liceo-sur': 'Liceo del Sur',
-                'instituto-tecnico': 'Instituto Técnico',
-                'colegio-santa-maria': 'Colegio Santa María',
-                'escuela-rural': 'Escuela Rural Integrada'
+                'colegio-central': 'CENTRO EDUCATIVO PACIFICO',
+                'escuela-norte': 'I.E AGROPECUARIA TAGACHI',
+                'liceo-sur': 'I.E ANTONIO MARIA CLARET',
+                'instituto-tecnico': 'I.E ANTONIO RICAURTE',
+                'colegio-santa-maria': 'I.E ANTONIO ROLDAN BETANCUR',
+                'escuela-rural': 'I.E CACIQUE NOANAMÁ'
             };
             return institutions[value] || value;
         }
@@ -311,31 +379,38 @@
 
         // Inicializar reportes de ejemplo para demostración
         function initializeSampleReports() {
-            reports['CS-240610-DEMO'] = {
-                id: 'CS-240610-DEMO',
-                isAnonymous: true,
-                institution: 'colegio-central',
-                incidentDate: '2025-06-08',
-                incidentLocation: 'Patio principal',
-                incidentType: 'verbal',
-                personsInvolved: 'Estudiante de grado 10°, víctima de grado 8°',
-                description: 'Situación de acoso verbal constante durante los recreos',
-                urgency: 'media',
-                timestamp: '2025-06-08T10:30:00Z',
-                status: 'en-revision',
-                statusHistory: [
-                    {
-                        status: 'recibida',
-                        date: '2025-06-08T10:30:00Z',
-                        note: 'Denuncia recibida correctamente'
-                    },
-                    {
-                        status: 'en-revision',
-                        date: '2025-06-09T08:00:00Z',
-                        note: 'Caso asignado al coordinador de convivencia para investigación'
-                    }
-                ]
-            };
+            // Load reports from localStorage
+            const existingReports = JSON.parse(localStorage.getItem('reports') || '{}');
+            Object.assign(reports, existingReports);
+            
+            // Add sample report if none exist
+            if (Object.keys(reports).length === 0) {
+                reports['CS-240610-DEMO'] = {
+                    id: 'CS-240610-DEMO',
+                    isAnonymous: true,
+                    institution: 'colegio-central',
+                    incidentDate: '2025-06-08',
+                    incidentLocation: 'Patio principal',
+                    incidentType: 'verbal',
+                    personsInvolved: 'Estudiante de grado 10°, víctima de grado 8°',
+                    description: 'Situación de acoso verbal constante durante los recreos',
+                    urgency: 'media',
+                    timestamp: '2025-06-08T10:30:00Z',
+                    status: 'en-revision',
+                    statusHistory: [
+                        {
+                            status: 'recibida',
+                            date: '2025-06-08T10:30:00Z',
+                            note: 'Denuncia recibida correctamente'
+                        },
+                        {
+                            status: 'en-revision',
+                            date: '2025-06-09T08:00:00Z',
+                            note: 'Caso asignado al coordinador de convivencia para investigación'
+                        }
+                    ]
+                };
+            }
         }
 
         // Mejorar experiencia de usuario
@@ -351,22 +426,27 @@
             
             // Contador de caracteres
             const description = document.getElementById('description');
-            const counter = document.createElement('small');
-            counter.style.color = '#6b7280';
-            counter.style.display = 'block';
-            counter.style.marginTop = '0.5rem';
-            description.parentNode.appendChild(counter);
-            
-            description.addEventListener('input', function() {
-                const count = this.value.length;
-                counter.textContent = `${count} caracteres (mínimo 30)`;
-                counter.style.color = count >= 30 ? '#16a34a' : '#dc2626';
-            });
+            if (description) {
+                const counter = document.createElement('small');
+                counter.style.color = '#6b7280';
+                counter.style.display = 'block';
+                counter.style.marginTop = '0.5rem';
+                description.parentNode.appendChild(counter);
+                
+                description.addEventListener('input', function() {
+                    const count = this.value.length;
+                    counter.textContent = `${count} caracteres (mínimo 30)`;
+                    counter.style.color = count >= 30 ? '#16a34a' : '#dc2626';
+                });
+            }
             
             // Permitir Enter en input de seguimiento
-            document.getElementById('trackingInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchReport();
-                }
-            });
+            const trackingInput = document.getElementById('trackingInput');
+            if (trackingInput) {
+                trackingInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchReport();
+                    }
+                });
+            }
         });
