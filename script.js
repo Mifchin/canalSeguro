@@ -61,6 +61,7 @@
             }
         }
 
+<<<<<<< HEAD
         // Logout function - Enhanced with better UX
         function logout() {
             // Show confirmation dialog
@@ -96,6 +97,13 @@
             } catch (error) {
                 console.error('Error al cerrar sesión:', error);
                 window.location.href = 'login.html';
+=======
+        // Logout function
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
             }
         }
 
@@ -479,6 +487,7 @@
                     }
                 });
             }
+<<<<<<< HEAD
         });
 
         // Additional security: Prevent back button after logout
@@ -492,4 +501,6 @@
         // Handle browser back/forward buttons
         window.addEventListener('popstate', function(event) {
             checkAuthentication();
+=======
+>>>>>>> 0a5389ed2eef41e0e277d5a0dd40d15c31fbd627
         });
