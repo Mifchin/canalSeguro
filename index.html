@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canal Seguro - Sistema de Denuncias Escolares</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
     <header class="header">
@@ -18,11 +17,17 @@
                         <p class="header-subtitle">Sistema de Denuncias Escolares</p>
                     </div>
                 </div>
+                <div class="user-section">
+                    <div class="user-info">
+                        <span class="user-name" id="userName">Usuario</span>
+                        <span class="user-role">Estudiante</span>
+                    </div>
+                </div>
                 <nav class="nav-tabs">
                     <a href="#" class="nav-tab active" data-tab="report">Nueva Denuncia</a>
                     <a href="#" class="nav-tab" data-tab="tracking">Seguimiento</a>
                     <a href="#" class="nav-tab" data-tab="news">Noticias</a>
-                    <a href="login.html" class="nav-tab" ">Salir</a>
+                    <a href="#" class="nav-tab logout-tab" onclick="logout()">Salir</a>
                 </nav>
             </div>
         </div>

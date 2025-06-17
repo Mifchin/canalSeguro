@@ -61,10 +61,40 @@
             }
         }
 
-        // Logout function
+        // Logout function - Enhanced with better UX
         function logout() {
-            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            // Show confirmation dialog
+            const confirmLogout = confirm('¿Estás seguro de que deseas cerrar sesión?');
+            
+            if (confirmLogout) {
+                try {
+                    // Clear session data
+                    sessionStorage.removeItem('currentUser');
+                    
+                    // Optional: Clear any other stored data if needed
+                    // localStorage.removeItem('tempData'); // Uncomment if you want to clear temp data
+                    
+                    // Show logout message (optional)
+                    console.log('Sesión cerrada exitosamente');
+                    
+                    // Redirect to login page
+                    window.location.href = 'login.html';
+                    
+                } catch (error) {
+                    console.error('Error al cerrar sesión:', error);
+                    // Even if there's an error, still redirect to login
+                    window.location.href = 'login.html';
+                }
+            }
+        }
+
+        // Alternative logout function without confirmation (if you prefer)
+        function logoutDirect() {
+            try {
                 sessionStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            } catch (error) {
+                console.error('Error al cerrar sesión:', error);
                 window.location.href = 'login.html';
             }
         }
@@ -449,4 +479,17 @@
                     }
                 });
             }
+        });
+
+        // Additional security: Prevent back button after logout
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                // Page was loaded from cache (back button)
+                checkAuthentication();
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            checkAuthentication();
         });
