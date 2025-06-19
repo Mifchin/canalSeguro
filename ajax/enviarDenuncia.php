@@ -34,7 +34,7 @@ $lugar                  = isset($_POST['lugar'])                ? trim(strip_tag
 $tipincId               = isset($_POST['tipincId'])             ? $_POST['tipincId']                               : '';
 $personas               = isset($_POST['personas'])             ? trim(strip_tags($_POST['personas']))             : '';
 $descripcion            = isset($_POST['descripcion'])          ? trim(strip_tags($_POST['descripcion']))          : '';
-$nivelurgencia          = isset($_POST['nivelurgencia'])        ? $_POST['nivelurgencia']                          : '';
+$nivelUrgencia          = isset($_POST['nivelUrgencia'])        ? $_POST['nivelUrgencia']                          : '';
 $testigos               = isset($_POST['testigos'])             ? trim(strip_tags($_POST['testigos']))             : '';
 $concurrenciaId         = isset($_POST['concurrenciaId'])       ? $_POST['concurrenciaId']                         : '';
 $informacionadicional   = isset($_POST['informacionadicional']) ? trim(strip_tags($_POST['informacionadicional'])) : '';
@@ -60,7 +60,7 @@ $stmt->bind_param(
     $tipincId,
     $personas,
     $descripcion,
-    $nivelurgencia,
+    $nivelUrgencia,
     $testigos,
     $concurrenciaId,
     $informacionadicional

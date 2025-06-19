@@ -150,16 +150,17 @@
 
                             <div class="form-group">
                                 <label class="form-label">Nivel de Urgencia *</label>
+                                <input type="hidden" name="nivelUrgencia" id="nivelUrgencia" value="0">
                                 <div class="urgency-selector">
-                                    <div class="urgency-option urgency-low" data-urgency="baja">
+                                    <div class="urgency-option urgency-low" data-urgency="0">
                                         <div>Baja</div>
                                         <small>Situación controlable</small>
                                     </div>
-                                    <div class="urgency-option urgency-medium" data-urgency="media">
+                                    <div class="urgency-option urgency-medium" data-urgency="1">
                                         <div>Media</div>
                                         <small>Requiere atención</small>
                                     </div>
-                                    <div class="urgency-option urgency-high" data-urgency="alta">
+                                    <div class="urgency-option urgency-high" data-urgency="2">
                                         <div>Alta</div>
                                         <small>Situación grave</small>
                                     </div>
