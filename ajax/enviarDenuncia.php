@@ -38,11 +38,12 @@ $nivelUrgencia          = isset($_POST['nivelUrgencia'])        ? $_POST['nivelU
 $testigos               = isset($_POST['testigos'])             ? trim(strip_tags($_POST['testigos']))             : '';
 $concurrenciaId         = isset($_POST['concurrenciaId'])       ? $_POST['concurrenciaId']                         : '';
 $informacionadicional   = isset($_POST['informacionadicional']) ? trim(strip_tags($_POST['informacionadicional'])) : '';
+$estadoId               = 1;
 
 // Preparo el insert
 $sql = "INSERT INTO denuncia 
-    (codigo, institucion_id, fecha, hora, lugar, tipinc_id, personas, descripcion, nivelurgencia, testigos, concurrencia_id, informacionadicional) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    (codigo, institucion_id, fecha, hora, lugar, tipinc_id, personas, descripcion, nivelurgencia, testigos, concurrencia_id, informacionadicional, estado_id) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conexion->prepare($sql);
 // Mostrar si hay error
 if ($stmt === false) {
@@ -51,7 +52,7 @@ if ($stmt === false) {
 }
 // Guardar el la base de datos
 $stmt->bind_param(
-    "sisssissssis",
+    "sisssissssisi",
     $codigo,
     $institutionId,
     $fecha,
@@ -63,7 +64,8 @@ $stmt->bind_param(
     $nivelUrgencia,
     $testigos,
     $concurrenciaId,
-    $informacionadicional
+    $informacionadicional,
+    $estadoId
 );
 // Mostrar los mensajes
 if ($stmt->execute()) {

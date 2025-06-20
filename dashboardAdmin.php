@@ -93,7 +93,7 @@
                     <div class="recent-reports">
                         <h3 class="section-title">Denuncias Recientes</h3>
                         <div class="reports-list" id="recentReportsList">
-                            <!-- Reports will be populated here -->
+                            <!-- Denuncias Recientes -->
                         </div>
                     </div>
 
@@ -249,6 +249,6 @@
         </div>
     </div>
 
-    <!--<script src="admin-script.js"></script>-->
+    <script src="script.js"></script>
 </body>
 </html>

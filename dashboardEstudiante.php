@@ -265,11 +265,9 @@
                         <p class="section-description">
                             Ingresa tu ID de seguimiento para conocer el estado actual de tu denuncia.
                         </p>
-
                         <div class="tracking-form">
-                            <input type="text" class="form-control" id="trackingInput" 
-                                placeholder="Ingresa tu ID de seguimiento (Ej: CS-123456-ABCD)">
-                            <button type="button" class="tracking-btn" onclick="searchReport()">
+                            <input type="text" class="form-control" id="trackingInput" placeholder="Ingresa tu ID de seguimiento (Ej: CS-123456-ABCD)">
+                            <button type="button" class="tracking-btn" id="trackingButton">
                                 <svg class="icon" style="width: 16px; height: 16px; margin-right: 8px;" viewBox="0 0 24 24">
                                     <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5z"/>
                                 </svg>
@@ -277,8 +275,16 @@
                             </button>
                         </div>
 
-                        <div id="trackingResults">
-                            <!-- Los resultados aparecerán aquí -->
+                        <div id="trackingResults" style="display: none";>
+                             <div class="status-card" id="seguimientoDenuncia">
+                                <div class="status-badge" id="nombre_estado"></div>
+                                <h4 id="codigo"></h4>
+                                <p id="nombre_institucion"></p>
+                                <p id="fecha"></p>
+                                <p id="nombre_tipoincidente"></p>
+                                <p id="nivel_urgencia"></p>
+                                <br>
+                            </div>
                         </div>
 
                         <!-- Ejemplo de estados -->
@@ -286,8 +292,8 @@
                             <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Estados de Denuncias:</h4>
                             
                             <div class="status-card status-pending">
-                                <div class="status-badge badge-pending">RECIBIDA</div>
-                                <h4>Denuncia Recibida</h4>
+                                <div class="status-badge badge-pending">PENDIENTE</div>
+                                <h4>Denuncia Pendiente</h4>
                                 <p>Tu denuncia ha sido recibida y está esperando revisión inicial por parte de la institución.</p>
                             </div>
 
@@ -314,7 +320,7 @@
                                 ¿Cómo Funciona el Seguimiento?
                             </h3>
                             <div class="info-card-content">
-                                <p><strong>1. Recibida:</strong> Tu denuncia llegó correctamente</p>
+                                <p><strong>1. Pendiente:</strong> Tu denuncia llegó correctamente</p>
                                 <p><strong>2. En Revisión:</strong> Se está investigando el caso</p>
                                 <p><strong>3. Finalizada:</strong> Se tomaron medidas y el caso se cerró</p>
                                 <br>
